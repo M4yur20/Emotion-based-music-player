@@ -16,7 +16,7 @@ def login_view(request):
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('home.html')
+                return redirect('home')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
@@ -25,7 +25,7 @@ def login_view(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('articles:list')
+        return redirect('home')
 
 
 def signup_view(request):
@@ -34,7 +34,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('articles:list')
+            return redirect('home')
             # user logged in hona chaiye
     else:
         form = UserCreateForm()
@@ -43,4 +43,4 @@ def signup_view(request):
 
 class MyPasswordChangeView(PasswordChangeView):
     template_name = 'accounts/reset.html'
-    success_url = reverse_lazy('home.html')
+    success_url = reverse_lazy('home')
