@@ -1,0 +1,9 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<form action="" method="post" class="">
+    {%csrf_token%}
+    <div >{{form.as_p}}</div>
+    <button type="submit">Reset</button>
+</form>
+{%endblock%}
