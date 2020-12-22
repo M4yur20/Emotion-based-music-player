@@ -2,6 +2,10 @@
 
 {% block content %}
     <title>{{type}} Playlist</title>
-
+    {% if messages %}
+        {% for message in messages %}
+        <ul><strong>{{message}}</strong></ul>
+        {% endfor %}
+    {% endif %}
     Hello there.
 {% endblock %}

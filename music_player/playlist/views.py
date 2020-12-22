@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Song
 from .forms import *
-
+from django.contrib import messages
 
 # Create your views here.
 
@@ -18,6 +18,8 @@ def general(request):
 def emotion(request, type):
     user = request.user
     songs = Song.objects.all().filter(user=user, type=type)
+    if len(songs)==0:
+        messages.info(request,f'Your playlist is empty.')
     dic = {0: 'Happy',
            1: 'Angry',
            2: 'Sad',
