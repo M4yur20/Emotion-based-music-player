@@ -5,6 +5,7 @@ from . import views
 app_name='emotions'
 
 urlpatterns=[
+    path("prediction/",views.predict,name="prediction"),
     ]
 
 
