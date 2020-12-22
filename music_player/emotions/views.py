@@ -7,7 +7,7 @@ from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 import cv2
 from .forms import *
-
+from django.contrib import messages
 json_file = open(r'C:\Users\mishr\Downloads\model786.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
@@ -24,10 +24,12 @@ def predict(request):
     print(form.is_valid())
     if form.is_valid():
         ins = form.save()
-        print(ins.image.path)
+        
         image = cv2.imread(ins.image.path, 0)
         faces = face_classifier.detectMultiScale(image, 1.3, 5)
-        print(len(faces))
+        if len(faces)==0:
+            messages.info(request,f"Sorry no face detected.Please try again")
+            return redirect("startpage")
         for (x,y,w,h) in faces:
        
             roi_gray=image[y:y+h,x:x+w]
