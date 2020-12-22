@@ -45,13 +45,13 @@ def song_upload(request,type):
 def song(request):
     if request.method == "POST":
         form = SongUploadForm(request.POST, request.FILES)
-        typee = request.POST.get('value')
-        print(typee)
-        instance = form.save(commit=False)
-        instance.user = request.user
-        instance.type=typee
-        instance.save()
-        return redirect('startpage')
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            typee=request.POST.get('playlist')
+            instance.type=typee
+            instance.save()
+            return redirect('startpage')
     else:
         form = SongUploadForm()
     return render(request, 'playlist/song.html', {'form': form})
