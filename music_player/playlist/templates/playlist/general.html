@@ -1,6 +1,32 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<h1>Hello there.</h1>
-<a href="{% url 'playlist:song' %}" class="btn btn-primary mr-2" style="float:right;">Add New Song to your Playlists</a>
+<a href="{% url 'playlist:song' %}" class="btn btn-primary mt-2" style="float:right;">Add New Song to your Playlists</a>
+<h1 align="center"><u>Your Music</u></h1>
+{% for song in songs %}
+{% if song.type == 0 %}
+<h2>Happy Playlist</h2>
+<h3>{{song.name}} : <audio controls>
+    <source src="{{song.track.url}}" type="audio/mp3">
+</audio></h3><br>
+{% elif song.type == 1 %}
+<hr>
+<h2>Angry Playlist</h2>
+<h3>{{song.name}} : <audio controls>
+    <source src="{{song.track.url}}" type="audio/mp3">
+</audio></h3><br>
+{% elif song.type == 2 %}
+<hr>
+<h2>Sad Playlist</h2>
+<h3>{{song.name}} : <audio controls>
+    <source src="{{song.track.url}}" type="audio/mp3">
+</audio></h3><br>
+{% elif song.type == 3 %}
+<hr>
+<h2>Neutral Playlist</h2>
+<h3>{{song.name}} : <audio controls>
+    <source src="{{song.track.url}}" type="audio/mp3">
+</audio></h3><br>
+{% endif %}
+{% endfor %}
 {% endblock %}
