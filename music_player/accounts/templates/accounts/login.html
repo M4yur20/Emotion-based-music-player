@@ -9,4 +9,10 @@
         {% endif%}
         <input type="submit" value="Login">
     </form>
+
+    <div class="not_user" >
+        <br><br>
+        <h3>Not a User Yet, Click below to Sign Up</h3>
+        <a href="{% url 'accounts:signup' %}" class="btn btn-primary">Sign Up</a>
+    </div>
 {% endblock %}
