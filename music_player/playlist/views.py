@@ -28,11 +28,13 @@ def emotion(request, type):
 
 
 @login_required(login_url='accounts:login')
-def song_upload(request):
+def song_upload(request,type):
+
     if request.method == "POST":
         form = SongUploadForm(request.POST, request.FILES)
         instance = form.save(commit=False)
         instance.user = request.user
+        instance.type=type
         instance.save()
         return redirect('home')
     else:
