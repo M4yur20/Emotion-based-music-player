@@ -6,4 +6,5 @@ app_name='playlist'
 urlpatterns = [
         path('',views.general,name='general'),
         path('<int:type>/',views.emotion,name='emotion'),
+        path('song_upload/',views.song_upload,name='song_upload'),
 ]
