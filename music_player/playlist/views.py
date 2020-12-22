@@ -29,14 +29,29 @@ def emotion(request, type):
 
 @login_required(login_url='accounts:login')
 def song_upload(request,type):
-
     if request.method == "POST":
         form = SongUploadForm(request.POST, request.FILES)
         instance = form.save(commit=False)
         instance.user = request.user
         instance.type=type
         instance.save()
-        return redirect('home')
+        return redirect('startpage')
     else:
         form = SongUploadForm()
     return render(request, 'playlist/song_upload.html', {'form': form})
+
+
+@login_required(login_url='accounts:login')
+def song(request):
+    if request.method == "POST":
+        form = SongUploadForm(request.POST, request.FILES)
+        typee = request.POST.get('value')
+        print(typee)
+        instance = form.save(commit=False)
+        instance.user = request.user
+        instance.type=typee
+        instance.save()
+        return redirect('startpage')
+    else:
+        form = SongUploadForm()
+    return render(request, 'playlist/song.html', {'form': form})
