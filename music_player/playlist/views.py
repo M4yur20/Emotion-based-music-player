@@ -6,6 +6,9 @@ from .forms import *
 
 
 # Create your views here.
+
+
+@login_required(login_url='accounts:login')
 def general(request):
     user = request.user
     songs = Song.objects.all().filter(user=user)

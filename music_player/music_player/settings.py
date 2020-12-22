@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'emotions',
     'playlist',
     'accounts',
+    'emotions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
