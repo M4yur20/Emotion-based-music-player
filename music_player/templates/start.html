@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-</head>
-<body>
+{% extends 'base_layout.html' %}
+{% block content %}
     <h3>Welcome To Emotion Based Music Player</h3>
-    <form action='{% url "emotions:prediction" %}' method="POST" enctype='multipart/form-data'>
+    <form  method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
-        <label for="img">Select image:</label>
-        <input type="file" id="img" name="img" accept="image/*"><br><br>
-        <input type='submit'>      
+        <div class="prediction">
+            {{ form.as_p }}
+        </div>
+        <button class="btn btn-primary">Continue</button>
     </form>
+        {% if request.GET.next%}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% endif %}
     <br>
     <br>
     <br>
     <h6>OR</h6>
     <a href="{% url 'playlist:general' %}"><h2>Go for default music player</h2></a>
-    
- 
-
-</body>
-</html>
+{% endblock %}
