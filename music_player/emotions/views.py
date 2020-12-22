@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.decorators.http import require_POST
 # Create your views here.
 import numpy as np
@@ -26,6 +26,23 @@ def predict(request):
         image=cv2.imread(ins.image.path,0) 
         faces=face_classifier.detectMultiScale(image,1.3,5)
         
+        for (x,y,w,h) in faces:
+            roi_gray=image[y:y+h,x:x+w]
+            if roi_gray.shape[0]>250 or roi_gray.shape[1]>250:
+                roi_gray=cv2.resize(roi_gray,(250,250),interpolation=cv2.INTER_AREA)
+            else:
+                roi_gray=cv2.resize(roi_gray,(250,250),interpolation=cv2.INTER_CUBIC)
+            roi_gray=np.array(roi_gray,'float32')
+            roi_gray/=255
+            label=loaded_model.predict(roi_gray.reshape(-1,250,250,1))
+            emotion=np.argmax(label[0])
+            return redirect('playlist:emotion',type=emotion)
+    else:
+        return redirect('home')
+
+
+
+                  
 
         
 

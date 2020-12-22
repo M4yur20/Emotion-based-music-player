@@ -21,7 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home"),
     path('playlist/',include('playlist.urls')),
-    path('',views.home,name='home'),
     path('accounts/',include('accounts.urls')),
+    path('emotions/',include('emotions.urls')),
+
 
 ]
