@@ -11,3 +11,6 @@ class Song(models.Model):
     track = models.FileField(upload_to='Songs')
     type = models.IntegerField(choices)
     name = models.CharField(max_length=30, default="Unknown", blank=True)
+
+    def __str__(self):
+        return self.type

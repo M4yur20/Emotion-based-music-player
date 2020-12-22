@@ -27,7 +27,7 @@ def login_view(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        return redirect('startpage')
 
 
 def signup_view(request):
@@ -39,7 +39,7 @@ def signup_view(request):
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('home')
+                return redirect('startpage')
     else:
         form = UserCreateForm()
     return render(request, 'accounts/signup.html', {'form': form})
@@ -47,4 +47,4 @@ def signup_view(request):
 
 class MyPasswordChangeView(PasswordChangeView):
     template_name = 'accounts/reset.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('startpage')

@@ -1,11 +1,17 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <title>{{type}} Playlist</title>
     {% if messages %}
         {% for message in messages %}
         <ul><strong>{{message}}</strong></ul>
+        <h2>Click the Button Below to add songs to your playlist.</h2>
+        <a href="{% url 'playlist:songupload' %}" class="btn btn-primary">Add Song</a>
         {% endfor %}
+
     {% endif %}
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 {% endblock %}
