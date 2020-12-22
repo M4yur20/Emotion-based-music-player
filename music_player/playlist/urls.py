@@ -5,5 +5,5 @@ app_name='playlist'
 
 urlpatterns = [
         path('',views.general,name='general'),
-        path('<str:emotion>/',views.emotion,name='emotion'),
+        path('<int:type>/',views.emotion,name='emotion'),
 ]

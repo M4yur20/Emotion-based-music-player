@@ -6,5 +6,4 @@ def home(request):
 
 
 
-def home(request):
-    return render(request,'base_layout.html')
+
