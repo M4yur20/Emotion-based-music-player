@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <h3>Welcome To Emotion Based Music Player</h3>
+    <form action='#' method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <label for="img">Select image:</label>
+        <input type="file" id="img" name="img" accept="image/*"><br><br>
+        <input type='submit'>      
+    </form>
+    <br>
+    <br>
+    <br>
+    <h6>OR</h6>
+    <a href="playlist:general"><h2>Go for default music player</h2></a>
+    
+ 
+
+</body>
+</html>
