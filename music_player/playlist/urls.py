@@ -7,5 +7,5 @@ urlpatterns = [
         path('',views.general,name='general'),
         path('<int:type>/',views.emotion,name='emotion'),
         path('songupload/',views.song_upload,name='songupload'),
-        path('song/',views.song,name='song'),
+        path('up-song/',views.up_song,name='song'),
 ]

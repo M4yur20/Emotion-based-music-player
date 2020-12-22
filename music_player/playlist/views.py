@@ -42,7 +42,7 @@ def song_upload(request,type):
 
 
 @login_required(login_url='accounts:login')
-def song(request):
+def up_song(request):
     if request.method == "POST":
         form = SongUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -54,4 +54,4 @@ def song(request):
             return redirect('startpage')
     else:
         form = SongUploadForm()
-    return render(request, 'playlist/song.html', {'form': form})
+    return render(request, 'playlist/up-song.html', {'form': form})
