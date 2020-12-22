@@ -8,6 +8,6 @@ class Song(models.Model):
                (2, 'sad'),
                (3, 'neutral'))
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    track = models.FileField()
+    track = models.FileField(upload_to='Songs')
     type = models.IntegerField(choices)
     name = models.CharField(max_length=30, default="Unknown", blank=True)
