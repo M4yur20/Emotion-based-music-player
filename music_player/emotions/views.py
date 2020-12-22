@@ -18,7 +18,7 @@ loaded_model.compile(loss=categorical_crossentropy,
             
 face_classifier=cv2.CascadeClassifier(r'C:\Users\mishr\haarcascade_frontalface_alt.xml')
 
-@require_POST()
+@require_POST
 def predict(request):
     form=PredictionForm(request.data,request.FILES)
     if form.is_valid():
