@@ -24,7 +24,7 @@ def emotion(request, type):
            1: 'Angry',
            2: 'Sad',
            3: 'Neutral'}
-    return render(request, 'playlist/type.html', {'songs': songs, 'type': dic[type]})
+    return render(request, 'playlist/type.html', {'songs': songs, 'type': dic[type],'emotion':type})
 
 
 @login_required(login_url='accounts:login')
