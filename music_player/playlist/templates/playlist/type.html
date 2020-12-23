@@ -15,7 +15,7 @@
 <h3 class="mt-3">{{song.name}} :
     <audio controls>
         <source src="{{song.track.url}}" type="audio/mp3">
-    </audio><a href="#" class="btn btn-danger mr-5" style="float:right;">Delete Song</a>
+    </audio><a href="{% url 'playlist:delete' type=emotion id=song.id %}" class="btn btn-danger mr-5" style="float:right;">Delete Song</a>
 </h3><hr>
     {% endfor %}
 {% endblock %}

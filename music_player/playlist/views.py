@@ -12,6 +12,8 @@ from django.contrib import messages
 def general(request):
     user = request.user
     songs = Song.objects.all().filter(user=user)
+    if len(songs)==0:
+        messages.info(request,f'Your playlist is empty.')
     return render(request, 'playlist/general.html', {'songs': songs})
 
 
@@ -55,3 +57,12 @@ def up_song(request):
     else:
         form = SongUploadForm()
     return render(request, 'playlist/up-song.html', {'form': form})
+
+
+def delete(request,type,id):
+    song=Song.objects.get(pk=id)
+    song.delete()
+    if type==4:
+        return redirect('playlist:general')
+    else:
+        return redirect('playlist:emotion',type=type)
