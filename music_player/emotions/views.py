@@ -20,8 +20,7 @@ loaded_model.compile(loss=categorical_crossentropy,
                      optimizer=Adam(lr=0.001),
                      metrics=['accuracy'])
 face_classifier = cv2.CascadeClassifier(
-    '/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')  # /Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml
-
+    '/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')
 
 # face_classifier = cv2.CascadeClassifier('/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')
 

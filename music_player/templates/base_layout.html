@@ -21,6 +21,7 @@
             {% else %}
             <a class="btn btn-success mt-5 mr-3" href="{% url 'accounts:login' %}" style="float:right;">Login</a>
             {% endif %}
+            <a href="{% url 'startpage' %}" class="btn btn-info mt-5 mr-2" style="float:right;">Home Page</a>
         </div>
         <div class="wrapper mt-0 ml-3">
             {% block content %}
