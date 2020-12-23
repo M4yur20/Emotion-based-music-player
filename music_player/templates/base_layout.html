@@ -24,6 +24,8 @@
 
             {% if "/" == request.path %}
             <a href="{% url 'startpage' %}" class="btn btn-info mt-5 mr-2" style="float:right; display:none;">Home Page</a>
+            {% elif "/accounts/login/" == request.path %}
+            <a href="{% url 'startpage' %}" class="btn btn-info mt-5 mr-2" style="float:right; display:none;">Home Page</a>
             {% else %}
             <a href="{% url 'startpage' %}" class="btn btn-info mt-5 mr-2" style="float:right; display:block;">Home Page</a>
             {% endif %}
