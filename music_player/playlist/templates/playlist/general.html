@@ -2,8 +2,12 @@
 
 {% block content %}
 <a href="{% url 'playlist:song' %}" class="btn btn-primary mt-2" style="float:right;">Add New Song to your Playlists</a>
-<h1 align="center"><u>Your Music</u></h1>
+<h1 align="center"><u>Your Music</u></h1><hr>
 {% for song in songs %}
-<h3>{{song.name}} : <audio controls><source src="{{song.track.url}}" type="audio/mp3"></audio></h3><br>
+<h3 class="mt-3">{{song.name}} :
+    <audio controls>
+        <source src="{{song.track.url}}" type="audio/mp3">
+    </audio><a href="#" class="btn btn-danger mr-5" style="float:right;">Delete Song</a>
+</h3><hr>
 {% endfor %}
 {% endblock %}
