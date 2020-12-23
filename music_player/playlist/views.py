@@ -38,7 +38,7 @@ def song_upload(request,type):
         return redirect('startpage')
     else:
         form = SongUploadForm()
-    return render(request, 'playlist/song_upload.html', {'form': form})
+    return render(request, 'playlist/song_upload.html', {'form': form,'type':type})
 
 
 @login_required(login_url='accounts:login')
