@@ -10,17 +10,16 @@ import cv2
 from .forms import *
 from django.contrib import messages
 
-# json_file = open('/Users/mayuragarwal/Downloads/model786.json', 'r')  # /Users/mayuragarwal/Downloads.model786.json
-json_file=open('C:/Users/mishr/Downloads/model786.json')
+# json_file = open('/Users/mayuragarwal/Downloads/model786.json', 'r')  # /Users/mayuragarwal/Downloads/model786.json
+json_file=open('/Users/mayuragarwal/Downloads/model786.json','r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-loaded_model.load_weights('C:/Users/mishr/Downloads/model786.h5')
+loaded_model.load_weights('/Users/mayuragarwal/Downloads/model786.h5')
 loaded_model.compile(loss=categorical_crossentropy,
                      optimizer=Adam(lr=0.001),
                      metrics=['accuracy'])
-face_classifier = cv2.CascadeClassifier(
-    'C:/Users/mishr/Desktop/haarcascade_frontalface_alt.xml')
+face_classifier = cv2.CascadeClassifier('/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')
 
 # face_classifier = cv2.CascadeClassifier('/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')
 
