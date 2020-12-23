@@ -11,24 +11,23 @@ import cv2
 from .forms import *
 from django.contrib import messages
 
-json_file = open('/Users/mayuragarwal/Downloads/model786.json', 'r')  # /Users/mayuragarwal/Downloads.model786.json
-json_file = open('/Users/mayuragarwal/Downloads/model786.json', 'r')
+#json_file = open('/Users/mayuragarwal/Downloads/model786.json', 'r')  # /Users/mayuragarwal/Downloads.model786.json
+json_file = open('C:/Users/mishr/Downloads/model786.json')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-loaded_model.load_weights('/Users/mayuragarwal/Downloads/model786.h5')
+loaded_model.load_weights('C:/Users/mishr/Downloads/model786.h5')
 loaded_model.compile(loss=categorical_crossentropy,
                      optimizer=Adam(lr=0.001),
                      metrics=['accuracy'])
-face_classifier = cv2.CascadeClassifier('/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml') # /Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml
-face_classifier = cv2.CascadeClassifier('/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')
+face_classifier = cv2.CascadeClassifier('C:/Users/mishr/Desktop/haarcascade_frontalface_alt.xml') # /Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml
+#face_classifier = cv2.CascadeClassifier('/Users/mayuragarwal/Desktop/sample_project/haarcascade_frontalface_alt.xml')
 
 
 @require_POST
 @login_required(login_url='accounts:login')
 def predict(request):
     form = PredictionForm(request.POST, request.FILES)
-    print(form.is_valid())
     if form.is_valid():
         ins = form.save()
     if form.is_valid():
@@ -36,6 +35,7 @@ def predict(request):
         image = cv2.imread(ins.image.path, 0)
         faces = face_classifier.detectMultiScale(image, 1.3, 5)
         if len(faces) == 0:
+            ins.delete()
             messages.info(request, f"Sorry no face detected.Please try again")
             return redirect("startpage")
         for (x, y, w, h) in faces:
@@ -48,6 +48,12 @@ def predict(request):
             roi_gray /= 255
             label = loaded_model.predict(roi_gray.reshape(-1, 250, 250, 1))
             emotion = np.argmax(label[0])
+            dic={0:'Happy',
+                 1:'Angry',
+                 2:'Sad',
+                 3:'Neutral'}
+            ins.emotion=dic[emotion] 
+            ins.save()
             return redirect('playlist:emotion', type=emotion)
     else:
         return redirect('startpage')
