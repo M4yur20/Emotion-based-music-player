@@ -11,11 +11,23 @@ from django.contrib import messages
 
 @login_required(login_url='accounts:login')
 def general(request):
+    if request.method=='POST':
+        delSongs=request.POST.getlist('songoption')
+        
+        for songid in delSongs:
+            
+            song=Song.objects.get(pk=songid)
+            song.delete()
+        
+        return redirect('playlist:general')
+    emptyList=False
     user = request.user
     songs = Song.objects.all().filter(user=user)
     if len(songs) == 0:
         messages.info(request, f'Your playlist is empty.')
-    return render(request, 'playlist/general.html', {'songs': songs})
+        emptyList=True
+
+    return render(request, 'playlist/general.html', {'songs': songs,'isEmpty':emptyList})
 
 
 def emotion(request, type):

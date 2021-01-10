@@ -2,17 +2,65 @@
 
 {% block content %}
 <a href="{% url 'playlist:song' %}" class="btn btn-primary mt-2" style="float:right;">Add New Song to your Playlists</a>
+{% if not isEmpty %}
+<div>
+<button  id="delButton" class="btn btn-danger mr-5" style="float:right;margin-top: 9px;" onclick="delButtonOnClick()">Delete Multiple</button>
+</div>
+{% endif %}
 {% if messages %}
 {% for message in messages %}
 <strong>{{message}}</strong>
 {% endfor %}
 {% endif %}
-<h1 align="center"><u>Your Music</u></h1><hr>
+<h1 align="center"><u>Your Music</u></h1></hr>
+<form action="{% url 'playlist:general' %}" method="POST">
+{% csrf_token %}
 {% for song in songs %}
 <h3 class="mt-3">{{song.name}} :
     <audio controls>
         <source src="{{song.track.url}}" type="audio/mp3">
-    </audio><a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger mr-5" style="float:right;">Delete Song</a>
+    </audio>
+    
+    <a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger mr-5 delsolo" style="float:right;">Delete Song</a>
+    
+    <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
+    
 </h3><hr>
 {% endfor %}
+<button type='submit' id="submitButton" class="btn btn-danger mr-5" style="display:none;float:right;" >Delete Selected</button>
+</form>
+<script>
+
+
+    function delButtonOnClick(){
+        
+        elemnt=document.getElementById('delButton');
+        elemnt.innerText="Delete Selected";
+        elemnt.style.display="none"; 
+        elemnt=document.getElementsByClassName('delsolo');
+        for(var i=0;i<elemnt.length;i+=1){
+            elemnt[i].style.display="none";    
+        }
+        elemnt=document.getElementsByClassName('delMultiple');
+        for(var i=0;i<elemnt.length;i+=1){
+            elemnt[i].style.display="initial";    
+        }
+        element=document.getElementById('submitButton');
+        element.style.display="initial";
+
+    }    
+    
+
+
+
+
+
+</script>
+
+
+
+
+
+
 {% endblock %}
+
