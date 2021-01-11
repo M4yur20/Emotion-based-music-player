@@ -29,9 +29,10 @@ face_classifier = cv2.CascadeClassifier('C:/Users/mishr/Desktop/haarcascade_fron
 def predict(request):
     form = PredictionForm(request.POST, request.FILES)
     if form.is_valid():
-        ins = form.save()
-    if form.is_valid():
-        ins = form.save()
+        ins = form.save(commit=False)
+        ins.user=request.user
+        ins.save()
+        
         image = cv2.imread(ins.image.path, 0)
         faces = face_classifier.detectMultiScale(image, 1.3, 5)
         if len(faces) == 0:
@@ -53,6 +54,7 @@ def predict(request):
                    2: 'Sad',
                    3: 'Neutral'}
             ins.emotion = dic[emotion]
+            ins.user=request.user
             ins.save()
             return redirect('playlist:emotion', type=emotion)
     else:
