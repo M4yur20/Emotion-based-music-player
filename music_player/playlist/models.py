@@ -12,6 +12,7 @@ class Song(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     track = models.FileField(upload_to='Songs')
     type = models.IntegerField(choices)
+    fav=models.BooleanField(default=False)
     name = models.CharField(max_length=30, default="Unknown", blank=True)
 
     def __str__(self):

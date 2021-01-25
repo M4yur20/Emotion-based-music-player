@@ -24,7 +24,14 @@
     <a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger mr-5 delsolo" style="float:right;">Delete Song</a>
     
     <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
+    <!-- <button style="float:right;margin:1%;">♡</button> -->
     
+    <i id="nonfav{{song.id}}" class="fa fa-heart-o" style="font-size:36px;float:right;margin-right:1%;" value="1" onclick="favchange(event,{{song.id}});"></i>
+
+    
+
+
+
 </h3><hr>
 {% endfor %}
 <button type='submit' id="submitButton" class="btn btn-danger mr-5" style="display:none;float:right;" >Delete Selected</button>
@@ -49,9 +56,25 @@
         element.style.display="initial";
 
     }    
+    function favchange(event,id){
     
-
-
+    var elemnt=document.getElementById("nonfav"+id);
+    
+    if (elemnt.style.color=='red'){
+        elemnt.style.color='black';
+        // alert("Hello");
+        // const xhr=new XMLHttpRequest();
+        // xhr.open('GET','http://lsapp.me/api/data');
+        // xhr.onload = () =>{
+        //    console.log(xhr.response);
+        // };
+        // xhr.send();
+        
+    }
+    else{
+        elemnt.style.color='red';
+    }
+    }
 
 
 

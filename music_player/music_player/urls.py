@@ -25,6 +25,7 @@ urlpatterns = [
     path('playlist/',include('playlist.urls')),
     path('accounts/',include('accounts.urls')),
     path('emotions/',include('emotions.urls')),
+    path('api/',include('api.urls')),
 
 
 ]
