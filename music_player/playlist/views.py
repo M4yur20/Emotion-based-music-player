@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Song
@@ -70,6 +71,24 @@ def up_song(request):
     else:
         form = SongUploadForm()
     return render(request, 'playlist/up-song.html', {'form': form})
+
+
+def fav(request,id):
+    song=Song.objects.get(pk=id)
+    temp=request.POST.get("fav")
+ 
+    if (temp=="yes"):
+       song.fav=True
+       song.save()
+    else:
+       song.fav=False
+       song.save()
+    
+
+    return JsonResponse(data={'fav':song.fav},status=200)
+        
+
+
 
 
 @login_required(login_url='accounts:login')

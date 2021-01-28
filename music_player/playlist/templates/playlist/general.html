@@ -1,6 +1,9 @@
+
 {% extends 'base_layout.html' %}
+{% load static %}
 
 {% block content %}
+{% csrf_token %}
 <a href="{% url 'playlist:song' %}" class="btn btn-primary mt-2" style="float:right;">Add New Song to your Playlists</a>
 {% if not isEmpty %}
 <div>
@@ -12,12 +15,16 @@
 <strong>{{message}}</strong>
 {% endfor %}
 {% endif %}
-<h1 align="center"><u>Your Music</u></h1></hr>
+<h1 align="center"><u>Your Music</u></h1>
 <form action="{% url 'playlist:general' %}" method="POST">
 {% csrf_token %}
+
 {% for song in songs %}
-<h3 class="mt-3">{{song.name}} :
-    <audio controls>
+<!-- <div class="mt-4 card">
+<div class="card-body" style="width: 18rem;">
+<span style="font-size:37px;margin-bottom: 3px;">{{song.name}}</span>
+   
+    <audio controls  style="height:35px;background-color:black;color:black;" class="ml-3 mb-0">
         <source src="{{song.track.url}}" type="audio/mp3">
     </audio>
     
@@ -26,16 +33,34 @@
     <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
     <!-- <button style="float:right;margin:1%;">♡</button> -->
     
-    <i id="nonfav{{song.id}}" class="fa fa-heart-o" style="font-size:36px;float:right;margin-right:1%;" value="1" onclick="favchange(event,{{song.id}});"></i>
 
     
 
 
-
-</h3><hr>
+<div class="card mt-2 ml-4" style="width: 17rem;height: 20rem;float:left;">
+    <img class="card-img-top" src="{% static 'download1.jpg' %}" alt="Card image cap">
+    <h5 class="card-title">{{song.name}}</h5>
+    <div>
+    
+    <!-- <audio controls  style="height:35px;background-color:black;color:black;">
+        <source src="{{song.track.url}}" type="audio/mp3">
+    </audio> -->
+    <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
+    {% if song.fav %}
+    <i id="fav{{song.id}}" class="fa fa-heart-o" style="color:red;cursor:pointer;margin-left: 2%;font-size:30px;margin-bottom:0px;" onclick="favchange(event,{{song.id}});"></i>
+    {% else %}
+    <i id="fav{{song.id}}" class="fa fa-heart-o" style="cursor:pointer;margin-left: 1%;font-size:30px;" onclick="favchange(event,{{song.id}});"></i>
+    {% endif %}
+    <a href="#" class="btn btn-primary ml-1 mb-1" style="font-size:15px;">Listen song</a>
+    <a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger delsolo ml-1 mb-1" >Delete Song</a>
+    
+    </div>
+  </div>
 {% endfor %}
+
 <button type='submit' id="submitButton" class="btn btn-danger mr-5" style="display:none;float:right;" >Delete Selected</button>
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 
@@ -57,22 +82,43 @@
 
     }    
     function favchange(event,id){
-    
-    var elemnt=document.getElementById("nonfav"+id);
+    var csrf=$("input[name=csrfmiddlewaretoken]").val();
+    var elemnt=document.getElementById("fav"+id);
     
     if (elemnt.style.color=='red'){
-        elemnt.style.color='black';
-        // alert("Hello");
-        // const xhr=new XMLHttpRequest();
-        // xhr.open('GET','http://lsapp.me/api/data');
-        // xhr.onload = () =>{
-        //    console.log(xhr.response);
-        // };
-        // xhr.send();
+        $.ajax({
+            url:'/playlist/fav/' + id,
+            data:{
+                csrfmiddlewaretoken : csrf,
+                fav : "no"   
+            },
+            type:'post',
+            success : function(response){
+                elemnt.style.color='black';
+            }
+
+
+        });
+
+        
+
         
     }
     else{
-        elemnt.style.color='red';
+        $.ajax({
+            url:'/playlist/fav/' + id,
+            data:{
+                csrfmiddlewaretoken : csrf,
+                fav : "yes"   
+            },
+            type:'post',
+            success : function(response){
+                elemnt.style.color='red';
+            }
+
+
+        });
+    
     }
     }
 
