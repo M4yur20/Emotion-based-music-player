@@ -9,26 +9,31 @@ from django.contrib import messages
 
 # Create your views here.
 
+@login_required(login_url='accounts:login')
+def playsong(request, sid):
+    user = request.user
+    song = Song.objects.get(user=user, pk=sid)
+    return render(request, "playlist/song.html", {"song":song})
+
 
 @login_required(login_url='accounts:login')
 def general(request):
-    if request.method=='POST':
-        delSongs=request.POST.getlist('songoption')
-        
+    if request.method == 'POST':
+        delSongs = request.POST.getlist('songoption')
+
         for songid in delSongs:
-            
-            song=Song.objects.get(pk=songid)
+            song = Song.objects.get(pk=songid)
             song.delete()
-        
+
         return redirect('playlist:general')
-    emptyList=False
+    emptyList = False
     user = request.user
     songs = Song.objects.all().filter(user=user)
     if len(songs) == 0:
         messages.info(request, f'Your playlist is empty.')
-        emptyList=True
+        emptyList = True
 
-    return render(request, 'playlist/general.html', {'songs': songs,'isEmpty':emptyList})
+    return render(request, 'playlist/general.html', {'songs': songs, 'isEmpty': emptyList})
 
 
 def emotion(request, type):
@@ -73,22 +78,18 @@ def up_song(request):
     return render(request, 'playlist/up-song.html', {'form': form})
 
 
-def fav(request,id):
-    song=Song.objects.get(pk=id)
-    temp=request.POST.get("fav")
- 
-    if (temp=="yes"):
-       song.fav=True
-       song.save()
+def fav(request, id):
+    song = Song.objects.get(pk=id)
+    temp = request.POST.get("fav")
+
+    if temp == "yes":
+        song.fav = True
+        song.save()
     else:
-       song.fav=False
-       song.save()
-    
+        song.fav = False
+        song.save()
 
-    return JsonResponse(data={'fav':song.fav},status=200)
-        
-
-
+    return JsonResponse(data={'fav': song.fav}, status=200)
 
 
 @login_required(login_url='accounts:login')

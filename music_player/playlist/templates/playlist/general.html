@@ -1,4 +1,3 @@
-
 {% extends 'base_layout.html' %}
 {% load static %}
 
@@ -23,37 +22,37 @@
 <!-- <div class="mt-4 card">
 <div class="card-body" style="width: 18rem;">
 <span style="font-size:37px;margin-bottom: 3px;">{{song.name}}</span>
-   
+
     <audio controls  style="height:35px;background-color:black;color:black;" class="ml-3 mb-0">
         <source src="{{song.track.url}}" type="audio/mp3">
     </audio>
-    
-    <a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger mr-5 delsolo" style="float:right;">Delete Song</a>
-    
-    <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
-    <!-- <button style="float:right;margin:1%;">♡</button> -->
-    
 
-    
+    <a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger mr-5 delsolo" style="float:right;">Delete Song</a>
+
+    <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
+-->
+
+
+
 
 
 <div class="card mt-2 ml-4" style="width: 17rem;height: 20rem;float:left;">
     <img class="card-img-top" src="{% static 'download1.jpg' %}" alt="Card image cap">
     <h5 class="card-title">{{song.name}}</h5>
     <div>
-    
+
     <!-- <audio controls  style="height:35px;background-color:black;color:black;">
         <source src="{{song.track.url}}" type="audio/mp3">
     </audio> -->
     <input type="checkbox" style="width:20px;height:20px;float:right;display:none;margin:2%" class="delMultiple" name="songoption" value="{{song.id}}">
     {% if song.fav %}
-    <i id="fav{{song.id}}" class="fa fa-heart-o" style="color:red;cursor:pointer;margin-left: 2%;font-size:30px;margin-bottom:0px;" onclick="favchange(event,{{song.id}});"></i>
+    <i id="fav{{song.id}}" class="fa fa-heart-o" style="color:red;cursor:pointer;margin-left:1%;font-size:30px" onclick="favchange(event,{{song.id}});"></i>
     {% else %}
     <i id="fav{{song.id}}" class="fa fa-heart-o" style="cursor:pointer;margin-left: 1%;font-size:30px;" onclick="favchange(event,{{song.id}});"></i>
     {% endif %}
-    <a href="#" class="btn btn-primary ml-1 mb-1" style="font-size:15px;">Listen song</a>
+    <a href="{% url 'playlist:playsong' sid=song.id %}" class="btn btn-primary ml-1 mb-1" style="font-size:15px;">Listen song</a>
     <a href="{% url 'playlist:delete' type=4 id=song.id %}" class="btn btn-danger delsolo ml-1 mb-1" >Delete Song</a>
-    
+
     </div>
   </div>
 {% endfor %}
@@ -65,32 +64,32 @@
 
 
     function delButtonOnClick(){
-        
+
         elemnt=document.getElementById('delButton');
         elemnt.innerText="Delete Selected";
-        elemnt.style.display="none"; 
+        elemnt.style.display="none";
         elemnt=document.getElementsByClassName('delsolo');
         for(var i=0;i<elemnt.length;i+=1){
-            elemnt[i].style.display="none";    
+            elemnt[i].style.display="none";
         }
         elemnt=document.getElementsByClassName('delMultiple');
         for(var i=0;i<elemnt.length;i+=1){
-            elemnt[i].style.display="initial";    
+            elemnt[i].style.display="initial";
         }
         element=document.getElementById('submitButton');
         element.style.display="initial";
 
-    }    
+    }
     function favchange(event,id){
     var csrf=$("input[name=csrfmiddlewaretoken]").val();
     var elemnt=document.getElementById("fav"+id);
-    
+
     if (elemnt.style.color=='red'){
         $.ajax({
             url:'/playlist/fav/' + id,
             data:{
                 csrfmiddlewaretoken : csrf,
-                fav : "no"   
+                fav : "no"
             },
             type:'post',
             success : function(response){
@@ -100,16 +99,16 @@
 
         });
 
-        
 
-        
+
+
     }
     else{
         $.ajax({
             url:'/playlist/fav/' + id,
             data:{
                 csrfmiddlewaretoken : csrf,
-                fav : "yes"   
+                fav : "yes"
             },
             type:'post',
             success : function(response){
@@ -118,7 +117,7 @@
 
 
         });
-    
+
     }
     }
 
