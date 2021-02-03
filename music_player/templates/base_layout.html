@@ -77,6 +77,9 @@
     <title>Beyond Music</title>
 </head>
 <body>
+  <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+  </div>
     <header>
         <div class="logo">
             <a href="{% url 'startpage' %}"><img class="logoo" src="{% static 'logo.jpg' %}"></a>
@@ -105,9 +108,7 @@
     </header>
 
 
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
+
     <script>
         $(window).on("load",function(){
           $(".loader-wrapper").fadeOut("slow");
