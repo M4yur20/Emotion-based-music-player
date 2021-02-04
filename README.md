@@ -14,7 +14,7 @@
 #### In this technique, we extract the 68 facial landmarks and the centre of gravity.We then calculate the distance of each of these 68 landmarks from the centre of gravity and the angle made by this line with the horizontal.We can also calculate the euclidean distance between each pair of landmarks.We use these distances and angles as our input vector.Next,we train a classifying model like SVM,random forest,etc on the input data.
 #### The problem with this approach is in the first step i.e the technique we use to extract the facial landmarks as it has to be perfect for higher accuracy of our model.The most widely known model for this task is Dlib’s 68 key points landmark predictor which gives very good results in real-time. But the problem starts when the face is occluded or at an angle to the camera which is very important for our task.
 
-### 3.Sequential custom made CNN
+### 3.CNN
 #### This is the algorithm that we implemented in our project and the training dataset comprises the JAFFE dataset,KDEF dataset and a few images captured by the team.A sequential CNN model is trained on these images.The dataset consists of 4789 training images and 1198 validation images.
 #### The input image is of shape (250,250,1) as we are dealing with grayscale images.For images greater than 250 pixels we use INTER_AREA interpolation technique to shrink the images and For images smaller than 250 pixels we use INTER_CUBIC technique to zoom the images.
 #### Dropouts and l2 regularization have been used to avoid overfitting.The model is compiled with Adam optimizer(lr=0.001).The model is trained for 50 epochs.
