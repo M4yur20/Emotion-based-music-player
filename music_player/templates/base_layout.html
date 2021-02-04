@@ -4,8 +4,8 @@
 <head>
 {% block head %}
 {% endblock %}
-    <style>
-        body {
+<style>
+ body {
   margin: 0;
   padding: 0;
   width:100vw;
@@ -59,7 +59,7 @@
   75% { height: 100%;}
   100% { height: 0%;}
 }
-    </style>
+</style>
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -104,8 +104,8 @@
 
 
     <script>
-        $(window).on("load",function(){
-          $(".loader-wrapper").fadeOut("slow");
+        $( document ).ready(function() {
+            $(".loader-wrapper").fadeOut("slow");
         });
     </script>
 
