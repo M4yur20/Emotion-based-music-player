@@ -22,7 +22,7 @@
 
 
 # Tech/Frameworks/Libraries Used:
-#### Html,Css,Javascript,Django,Keras,Pandas,cv2.
+#### Html, Css, Javascript, Django, Keras, Pandas, cv2.
 
 
 
