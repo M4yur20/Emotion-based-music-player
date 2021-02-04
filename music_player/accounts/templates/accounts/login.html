@@ -1,5 +1,8 @@
 {% extends 'base_layout.html' %}
 {% block content %}
+<div class="container">
+    <div class="row mx-auto">
+    
     <h1 align="center" class="text-white">Login</h1>
     <form class="site-form" action="{% url 'accounts:login' %}" method="post">
         {%csrf_token%}
@@ -9,10 +12,14 @@
         {% endif%}
         <input type="submit" value="Login" class="btn btn-success">
     </form>
+    </div>
+  <div class="row mx-auto mt-5">
 
+    
     <div class="not_user" >
-        <br><br>
         <h3>Not a User Yet, Click below to Sign Up</h3>
         <a href="{% url 'accounts:signup' %}" class="btn btn-primary">Sign Up</a>
     </div>
+   </div>
+</div>
 {% endblock %}
