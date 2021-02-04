@@ -21,4 +21,13 @@
 #### Final Results:The model achieves training accuracy of 0.98 and validation accuracy of 0.92 after 50 epochs.The model can be trained for a few more epochs to achieve better performance. :Our sequential CNN model gives satisfactory results.The model was validated on five different test sets and gives ~90% accuracy.We need to keep in mind that humans express the same emotion in different ways and hence the model may fail sometimes.The models can be extended to capture additional emotions such as ‘Disgust’,’Surprise’,etc. We can try transfer learning and fine tuning i.e training the last few layers of the model.If working with facial landmark detection method,we can try training a CNN model for predicting the 68 facial landmarks.The app can be integrated with music-streaming API to fetch the songs.
 
 
+# Tech/Frameworks/Libraries Used:
+#### Html,Css,Javascript,Django,Keras,Pandas,cv2.
+
+
+
+
+## Contributors:
+#### Vinayak Mishra
+[https://github.com/Vinayak333-tech/]
 
