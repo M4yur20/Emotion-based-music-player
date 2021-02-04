@@ -1,2 +1,2 @@
-# ebmr_proj
+# Emotion based music recommendation
  Emotions Based Music Reccomondations
