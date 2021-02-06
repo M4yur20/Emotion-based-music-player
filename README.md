@@ -22,7 +22,21 @@
 
 
 # Tech/Frameworks/Libraries Used:
-#### Javascript, Django, Keras, Pandas, cv2.
+#### JQuery, Django, Keras, Pandas, cv2.
+
+
+
+Screenshots:
+
+![Screenshot](/images/screenshot1.png)
+
+![Screenshot](/images/screenshot2.png)
+
+![Screenshot](/images/screenshot3.png)
+
+![Screenshot](/images/screenshot4.png)
+
+![Screenshot](/images/screenshot5.png)
 
 
 
