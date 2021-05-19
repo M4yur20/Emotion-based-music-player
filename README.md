@@ -28,7 +28,7 @@
 
 Screenshots:
 
-![Screenshot](/images/screenshot1.png)
+!(/images/screenshot1.png)
 
 ![Screenshot](/images/screenshot4.png)
 
